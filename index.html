@@ -1,39 +1,77 @@
+
+
 <html lang="de">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Angular Material style sheet -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
-    <title>{{site}}</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body ng-app="pawApp" ng-cloak>
-<!--
-  Your HTML content here
--->
+<body ng-app="pawApp" ng-cloak ng-controller="pawController">
+
+<md-menu id="topmenu" flex layout="row" md-theme="{{ showDarkTheme ? 'dark-orange' : 'orange' }}" md-theme-watch="">
+    <md-menu-bar>
+        <md-menu ng-repeat="link in links">
+            <button ng-click="$mdMenu.open()">
+                {{ link.title }}
+            </button>
+            <md-menu-content ng-hide="!link.step" >
+                <md-menu-item type="checkbox" ng-model="settings.allowChanges">{{ link.step }}</md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </md-menu-bar>
+</md-menu>
+
+<md-content class="md-padding" flex="100" layout-xs="column" layout="row">
+
+    <md-card flex="50" ng-repeat="box in boxes" md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch="">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">{{ box.title }}</span>
+                <span class="md-subhead">{{ box.content}}</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content layout="row" layout-align="space-between">
+            <img ng-src="{{ box.image }}" class="md-media-xl card-media" />
+            <md-card-actions layout="column">
+                <md-button class="md-icon-button" >
+                    <md-icon> favorite </md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Settings">
+                    <md-icon> menu </md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Share">
+                    <md-icon> share_arrow </md-icon>
+                </md-button>
+            </md-card-actions>
+        </md-card-content>
+    </md-card>
+
+
+    <div layout="" layout-padding="" layout-align="center end" style="height:200px">
+        <md-checkbox ng-model="showDarkTheme">Use 'Dark' Themed Cards</md-checkbox>
+    </div>
+    <md-icon md-svg-icon="social:android" aria-label="android "></md-icon>
+
+</md-content>
+
+<!-- Icon urls; may be preloaded in templateCache -->
+<md-icon md-svg-src="/android.svg" aria-label="android "></md-icon>
+<md-icon md-svg-src="{{ getAndroid() }}" aria-label="android "></md-icon>
 
 <!-- Angular Material requires Angular.js Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+
 <!-- Angular Material Library -->
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
 
-<div ng-controller="pawController" layout="row" layout-xs="column">
-
-    <div flex="33" class="one">{{ title }}</div>
-
-        <div flex="20" flex-md="10" hide-lg class="two_one"></div>
-        <div flex="30px" show hide-md="{{ vm.hideBox }}" flex-md="25" class="two_two"></div>
-        <div flex="20" flex-md="65" class="two_three"></div>
-
-    </div>
-    <div flex class="three">
-        {{ 1 + 1 }}
-        {{ title }}
-    </div>
-
-</div>
+<!-- Angular Controller -->
 <script type="text/javascript" src="controller/pawController.js"></script>
+
+<!-- Angular Directives -->
 <script type="text/javascript" src="directive/pawBoxes.js"></script>
 
 </body>
