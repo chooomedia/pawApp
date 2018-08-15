@@ -1,5 +1,3 @@
-
-
 <html lang="de">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,21 +8,20 @@
 <body ng-app="pawApp" ng-cloak ng-controller="pawController">
 
 <md-menu id="topmenu" flex layout="row" md-theme="{{ showDarkTheme ? 'dark-orange' : 'orange' }}" md-theme-watch="">
-    <md-menu-bar>
-        <md-menu ng-repeat="link in links">
-            <button ng-click="$mdMenu.open()">
-                {{ link.title }}
-            </button>
-            <md-menu-content ng-hide="!link.step" >
-                <md-menu-item type="checkbox" ng-model="settings.allowChanges">{{ link.step }}</md-menu-item>
-            </md-menu-content>
-        </md-menu>
-    </md-menu-bar>
+        <md-menu-bar>
+            <md-menu ng-repeat="link in links">
+                <button ng-click="$mdMenu.open()">
+                    {{ link.title }}
+                </button>
+                <md-menu-content ng-hide="!link.step">
+                    <md-menu-item type="checkbox" ng-model="settings.allowChanges">{{ link.step }}</md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </md-menu-bar>
 </md-menu>
-
-<md-content class="md-padding" flex="100" layout-xs="column" layout="row">
-
-    <md-card flex="50" ng-repeat="box in boxes" md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch="">
+x
+<md-content class="md-padding" flex="100" layout-xs="column" layout="row" ng-repeat="box in boxes" md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch="">
+    <md-card flex="50" flex-xs="100">
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">{{ box.title }}</span>
@@ -32,21 +29,20 @@
             </md-card-title-text>
         </md-card-title>
         <md-card-content layout="row" layout-align="space-between">
-            <img ng-src="{{ box.image }}" class="md-media-xl card-media" />
+            <img ng-src="{{ box.image }}" class="md-media-xl card-media"/>
             <md-card-actions layout="column">
-                <md-button class="md-icon-button" >
-                    <md-icon> favorite </md-icon>
+                <md-button class="md-icon-button">
+                    <md-icon> favorite</md-icon>
                 </md-button>
                 <md-button class="md-icon-button" aria-label="Settings">
-                    <md-icon> menu </md-icon>
+                    <md-icon> menu</md-icon>
                 </md-button>
                 <md-button class="md-icon-button" aria-label="Share">
-                    <md-icon> share_arrow </md-icon>
+                    <md-icon> share_arrow</md-icon>
                 </md-button>
             </md-card-actions>
         </md-card-content>
     </md-card>
-
 
     <div layout="" layout-padding="" layout-align="center end" style="height:200px">
         <md-checkbox ng-model="showDarkTheme">Use 'Dark' Themed Cards</md-checkbox>
