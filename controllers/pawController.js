@@ -1,4 +1,12 @@
-app.controller('pawController', ['$scope', '$http', function($scope, $http) {
+app.controller('pawController', ['$scope', '$http', function ($scope, $http) {
+
+  $scope.logo =
+    {
+      url: 'paw.logo.png',
+      title: 'the Paw Logo',
+      alt: 'Logo 2018'
+    };
+
   $http({
     method: 'GET',
     url: 'data/pawContent.json'
@@ -31,14 +39,6 @@ app.controller('pawController', ['$scope', '$http', function($scope, $http) {
     }
   ]
 }])
-
-  .config(function ($mdThemingProvider) {
-    $mdThemingProvider.theme('dark-grey').backgroundPalette('grey').dark();
-    $mdThemingProvider.theme('dark-orange').backgroundPalette('orange').dark();
-    $mdThemingProvider.theme('dark-purple').backgroundPalette('deep-purple').dark();
-    $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();
-  })
-
   .config(function ($mdIconProvider) {
     $mdIconProvider
       .iconSet('social', 'img/icons/sets/social-icons.svg', 24)

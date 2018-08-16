@@ -1,5 +1,5 @@
 <html lang="de" ng-app="pawApp">
-<head >
+<head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
@@ -8,20 +8,20 @@
   <link type="text/css" href="style.css" rel="stylesheet">
 </head>
 
-<body ng-cloak ng-controller="pawController">
-<md-content>
-  <md-menu-bar flex="100" layout="row">
-    <md-menu ng-repeat="link in links">
-      <button ng-click="$mdMenu.open()">
-        {{ link.title }}
-      </button>
-      <md-menu-content ng-hide="!link.step">
-        <md-menu-item type="checkbox" ng-model="settings.allowChanges">{{ link.step }}</md-menu-item>
-      </md-menu-content>
-    </md-menu>
-    <md-checkbox class="checkBoxTop" ng-model="showDarkTheme">DarkMode</md-checkbox>
-  </md-menu-bar>
-</md-content>
+<body md-theme ng-cloak ng-controller="pawController">
+<md-toolbar layout="row">
+  <img ng-src="{{logo.url}}" alt="{{logo.title}}" title="{{logo.title}}" />
+    <md-menu-bar layout="row">
+      <md-menu flex="10" ng-repeat="link in links">
+        <button ng-click="$mdMenu.open()">
+          {{ link.title }}
+        </button>
+        <md-menu-content ng-hide="!link.step">
+          <md-menu-item type="checkbox" ng-model="settings.allowChanges">{{ link.step }}</md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </md-menu-bar>
+</md-toolbar>
 
 <md-content layout-xs="column" layout="row" flex layout-wrap>
   <div ng-repeat="box in boxes" class="fade md-padding" flex="33" flex-xs="50">
