@@ -1,0 +1,27 @@
+#topMenu {
+  background: #0099cc;
+  line-height: 64px;
+}
+
+#mainCards {
+  margin: 0 auto;
+}
+
+md-content{
+  flex-wrap: wrap;
+}
+
+.fade .ng-enter {
+  transition: all .3s;
+  opacity: 0;
+}
+
+.fade .ng-enter-active {
+  transition: all .3s;
+  opacity: 1;
+}
+
+.checkBoxTop {
+  line-height: 40px;
+  font-size: 14px;
+}
