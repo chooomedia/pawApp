@@ -1,7 +1,6 @@
 app.controller('pawController', ['$scope', '$http', 'pawService', function ($scope, $http, pawService) {
 
     $scope.data = pawService('Suche');
-
     $scope.logo =
         {
             url: 'paw.logo.png',
