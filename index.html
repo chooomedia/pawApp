@@ -9,10 +9,11 @@
 </head>
 
 <body md-theme ng-cloak ng-controller="pawController">
+
 <md-toolbar layout="row">
-  <img ng-src="{{logo.url}}" alt="{{logo.title}}" title="{{logo.title}}" />
+  <img class="topLogo" ng-src="{{logo.url}}" alt="{{logo.title}}" title="{{logo.title}}" />
     <md-menu-bar layout="row">
-      <md-menu flex="10" ng-repeat="link in links">
+      <md-menu ng-repeat="link in links">
         <button ng-click="$mdMenu.open()">
           {{ link.title }}
         </button>
