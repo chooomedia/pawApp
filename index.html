@@ -8,32 +8,53 @@
     <link type="text/css" href="style.css" rel="stylesheet">
 </head>
 
-<body md-theme ng-cloak ng-controller="pawController">
+<body ng-cloak ng-controller="pawController">
 <div layout="column" layout-fill>
     <header>
-        <md-toolbar layout="row">
+        <md-toolbar layout="row" flex>
             <img class="topLogo" ng-src="{{logo.url}}" alt="{{logo.title}}" title="{{logo.title}}"/>
-            <md-menu-bar layout="row">
+            <md-menu-bar layout="row" layout-align="start center">
                 <md-menu ng-repeat="link in links">
                     <button ng-click="$mdMenu.open()">
-                        {{ link.title }}
+                        {{link.title}}
                     </button>
                     <md-menu-content ng-hide="!link.step">
                         <md-menu-item type="checkbox" ng-model="settings.allowChanges">{{ link.step }}</md-menu-item>
                     </md-menu-content>
                 </md-menu>
             </md-menu-bar>
+            <md-menu-bar layout="row" layout-align="end center">
+                <md-icon>search</md-icon>
+                <md-input-container class="topInput">
+                    <form ng-submit="getData(searchField)">
+                        <input type="text" data-ng-model="searchField" placeholder="Search on Flickr...?"/>
+                    </form>
+                </md-input-container>
+            </md-menu-bar>
         </md-toolbar>
     </header>
 
+    <md-content layout="row" ng-if="images">
+        <div ng-repeat="image in images" class="slide md-padding" flex="33" flex-xs="100">
+            <md-card layout-align="center center" style="margin:0!important;">
+                <md-card-header>{{image}}</md-card-header>
+                <md-card-content>
+                    <img ng-src="{{image}}" alt="{{images.title}}">
+                </md-card-content>
+            </md-card>
+        </div>
+    </md-content>
 
-    <md-content layout="row" flex layout-fill>
-        <div ng-repeat="box in boxes" class="fade md-padding" flex="33" flex-xs="100">
+    <md-content layout="row">
+        <div ng-repeat="item in main" class="slide md-padding" flex="66" flex-xs="100">
+            <h1>{{item.title}}</h1>
+            <p>{{item.content}}</p>
+        </div>
+        <div ng-repeat="box in boxes" class="slide md-padding" flex="33" flex-xs="100">
             <app-box info="box"></app-box>
         </div>
     </md-content>
 </div>
-
 
 <!-- Angular Material requires Angular.js Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
@@ -47,8 +68,7 @@
 <!-- Modules -->
 <script src="app.js"></script>
 
-<!-- Services
-<script src="services/pawServices.js"></script> -->
+<!-- Services -->
 
 <!-- Angular Controller -->
 <script src="controllers/pawController.js"></script>

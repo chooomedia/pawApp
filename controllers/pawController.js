@@ -1,5 +1,39 @@
 app.controller('pawController', ['$scope', '$http', 'pawService', function ($scope, $http, pawService) {
 
+    $scope.getData = function (searchField) {
+        var API_KEY = '4c94cd4a5445ea5f72b710ea8b3e59e0';
+        $http.get("http://api.flickr.com/services/rest/", {
+            params: {
+                method: "flickr.photos.search",
+                api_key: API_KEY,
+                format: "json",
+                nojsoncallback: 1,
+                per_page: "6",
+                tags: searchField,
+                tag_mode: "all"
+            }
+        })
+            .success(function (response) {
+                $scope.images = response.data.photos.photo.map(function (photo) {
+                    return "http://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg"
+                        .replace("{farm-id}", photo.farm)
+                        .replace("{server-id}", photo.server)
+                        .replace("{id}", photo.id)
+                        .replace("{secret}", photo.secret)
+                });
+                console.log($scope.images);
+            });
+        // Public API
+        return {
+            getPhotosByTag: function (tag) {
+                return getPhotosByTagFn(tag);
+            },
+            getApiKey: function(){
+                return API_KEY;
+            }
+        };
+    };
+
     $scope.data = pawService('Suche');
     $scope.logo =
         {
@@ -17,7 +51,10 @@ app.controller('pawController', ['$scope', '$http', 'pawService', function ($sco
         console.log(error);
     }, 2000);
 
-    $scope.title = "the Paw Site";
+    $scope.main = [
+        {title: 'Welcome to these AngularJS App'},
+        {content: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'}
+    ];
     $scope.links = [
         {
             title: "Home",
@@ -40,11 +77,6 @@ app.controller('pawController', ['$scope', '$http', 'pawService', function ($sco
         }
     ]
 }])
-    .config(function ($mdIconProvider) {
-        $mdIconProvider
-            .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
-            .defaultIconSet('img/icons/sets/core-icons.svg', 24);
-    })
 
     .factory('pawService', function () {
         return function (data) {

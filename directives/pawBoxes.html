@@ -1,4 +1,4 @@
-<md-card id="mainCards" class="md-padding">
+<md-card id="mainCards" class="md-padding" ng-controller="pawController">
   <md-chips>
     <md-chip>{{ info.author }}</md-chip>
   </md-chips>
@@ -10,7 +10,10 @@
     </md-card-title>
 
     <md-card-content layout="row" layout-align="space-between">
-      <img ng-src="{{ info.image }}" class="card-media"/>
+        <div ng-repeat="image in images">
+            <img ng-src="{{ image }}" class="card-media"/>
+        </div>
+            <img ng-src="{{ info.image }}" class="card-media"/>
         <md-card-actions layout="column">
             <md-button class="md-icon-button">
                 <md-icon> favorite</md-icon>
