@@ -46,10 +46,12 @@
     </md-content>
 
     <md-content layout="row" ng-view>
-        <div ng-repeat="item in main" class="slide md-padding" flex="66" flex-xs="100">
-            <h1>{{item.title}}</h1>
-            <p>{{item.content}}</p>
-        </div>
+        <md-content ng-repeat="item in main" class="slide md-padding" flex="66" flex-xs="100">
+            <div>
+                <h1>{{item.title}}</h1>
+                <p>{{item.content}}</p>
+            </div>
+        </md-content>
         <div ng-repeat="box in boxes" class="slide md-padding" flex="33" flex-xs="100">
             <app-box info="box"></app-box>
         </div>

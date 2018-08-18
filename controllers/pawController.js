@@ -1,7 +1,7 @@
 app.controller('pawController', ['$scope', '$http', 'pawService', function ($scope, $http, pawService) {
 
     $scope.getData = function (searchField) {
-        var API_KEY = '4c94cd4a5445ea5f72b710ea8b3e59e0';
+        var API_KEY = '3a54d20b53f7b07e3023d62e399c3174';
         $http.get("http://api.flickr.com/services/rest/", {
             params: {
                 method: "flickr.photos.search",
@@ -14,13 +14,14 @@ app.controller('pawController', ['$scope', '$http', 'pawService', function ($sco
             }
         })
             .then(function (response) {
-                $scope.images = response.data.photos.photo.map(function (photo) {
-                    return "http://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg"
+                var array = response.data.photos.photo.map(function (photo) {
+                    return "https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg"
                         .replace("{farm-id}", photo.farm)
                         .replace("{server-id}", photo.server)
                         .replace("{id}", photo.id)
                         .replace("{secret}", photo.secret)
                 });
+                $scope.images = array;
                 console.log($scope.images);
             });
         // Public API
