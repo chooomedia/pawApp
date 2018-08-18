@@ -24,7 +24,7 @@
                 </md-menu>
             </md-menu-bar>
             <md-menu-bar layout="row" layout-align="end center">
-                <md-icon>search</md-icon>
+                <md-icon ng-click="getData(searchField)">search</md-icon>
                 <md-input-container class="topInput">
                     <form ng-submit="getData(searchField)">
                         <input type="text" data-ng-model="searchField" placeholder="Search on Flickr...?"/>
@@ -45,7 +45,7 @@
         </div>
     </md-content>
 
-    <md-content layout="row">
+    <md-content layout="row" ng-view>
         <div ng-repeat="item in main" class="slide md-padding" flex="66" flex-xs="100">
             <h1>{{item.title}}</h1>
             <p>{{item.content}}</p>

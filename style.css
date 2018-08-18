@@ -3,19 +3,7 @@
   line-height: 64px;
 }
 
-.slide {
-  overflow: hidden;
-  transition: 0.3s;
-  height: 30px;
-}
 
-.slide.ng-enter {
-  height: 0;
-}
-
-.slide.ng-enter.ng-enter-active {
-  height: 30px;
-}
 
 form {
   margin-bottom: 0 !important;
@@ -24,8 +12,12 @@ form {
 .topInput {
   min-width: 33%;
   height: 2em;
-  top: -2px;
-  font-size: 15px;
+  top: -5px;
+  font-size: 14px;
+}
+
+.topInput label {
+  color: #000000;
 }
 
 .topLogo {

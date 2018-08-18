@@ -13,7 +13,7 @@ app.controller('pawController', ['$scope', '$http', 'pawService', function ($sco
                 tag_mode: "all"
             }
         })
-            .success(function (response) {
+            .then(function (response) {
                 $scope.images = response.data.photos.photo.map(function (photo) {
                     return "http://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg"
                         .replace("{farm-id}", photo.farm)
@@ -52,7 +52,7 @@ app.controller('pawController', ['$scope', '$http', 'pawService', function ($sco
     }, 2000);
 
     $scope.main = [
-        {title: 'Welcome to these AngularJS App'},
+        {title: 'Welcome to Paw AngularJS App'},
         {content: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'}
     ];
     $scope.links = [
