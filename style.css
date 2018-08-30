@@ -3,8 +3,6 @@
   line-height: 64px;
 }
 
-
-
 form {
   margin-bottom: 0 !important;
 }
@@ -30,7 +28,7 @@ form {
   margin: 0 auto;
 }
 
-md-content{
+md-content {
   flex-wrap: wrap;
 }
 
@@ -38,7 +36,6 @@ md-content{
   transition: all .3s;
   opacity: 0;
 }
-
 .fade .ng-enter-active {
   transition: all .3s;
   opacity: 1;
@@ -48,3 +45,5 @@ md-content{
   line-height: 40px;
   font-size: 14px;
 }
+
+/*# sourceMappingURL=style.css.map */
