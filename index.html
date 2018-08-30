@@ -4,26 +4,22 @@
     <!-- Angular Material style sheet -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/ionic.app.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 </head>
 <body ng-app="pawApp" ng-cloak ng-controller="pawController">
 
-<md-menu id="topmenu" flex layout="row" md-theme="{{ showDarkTheme ? 'dark-orange' : 'orange' }}" md-theme-watch="">
-        <md-menu-bar>
-            <md-menu ng-repeat="link in links">
-                <button ng-click="$mdMenu.open()">
-                    {{ link.title }}
-                </button>
-                <md-menu-content ng-hide="!link.step">
-                    <md-menu-item type="checkbox" ng-model="settings.allowChanges">{{ link.step }}</md-menu-item>
-                </md-menu-content>
-            </md-menu>
-        </md-menu-bar>
-</md-menu>
+<md-menu-bar id="topmenu" flex layout="row" md-theme="{{ showDarkTheme ? 'dark-orange' : 'orange' }}" md-theme-watch="">
+    <md-button ng-click="$mdMenu.open()" ng-repeat="link in links">
+        {{ link.title }}
+    </md-button>
+    <md-menu-content ng-hide="!link.step">
+        <md-menu-item type="checkbox" ng-model="settings.allowChanges">{{ link.step }}</md-menu-item>
+    </md-menu-content>
+</md-menu-bar>
 
-<md-content class="md-padding" flex="100" layout-xs="column" layout="row" >
+<md-content class="md-padding" flex="100" layout-xs="column" layout="row">
     <div ng-repeat="box in boxes">
-        <app-box info="box" ></app-box>
+        <app-box info="box"></app-box>
     </div>
 </md-content>
 
