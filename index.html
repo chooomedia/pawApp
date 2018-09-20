@@ -1,31 +1,84 @@
-<html lang="de">
+<html lang="de" ng-app="pawApp">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Angular Material style sheet -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    <title>{{title}}</title>
+    <script>
+        document.write('<base href="' + document.location + '" />');
+    </script>
+    <link type="text/css" href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
 </head>
-<body ng-app="pawApp" ng-cloak ng-controller="pawController">
 
-<md-menu-bar id="topmenu" flex layout="row" md-theme="{{ showDarkTheme ? 'dark-orange' : 'orange' }}" md-theme-watch="">
-    <md-button ng-click="$mdMenu.open()" ng-repeat="link in links">
-        {{ link.title }}
-    </md-button>
-    <md-menu-content ng-hide="!link.step">
-        <md-menu-item type="checkbox" ng-model="settings.allowChanges">{{ link.step }}</md-menu-item>
-    </md-menu-content>
-</md-menu-bar>
+<body ng-model="main" ng-cloak ng-controller="pawController">
+<div layout="column" layout-fillng>
+    <header class="blurred-box">
+        <md-toolbar layout="row" flex>
+            <img ng-src="{{logo.url}}" alt="{{logo.title}}" class="md-logo md-avatar">
+            <md-menu-bar layout="row" layout-align="start center">
+                <md-menu ng-repeat="link in links" ng-hide="clicker">
+                    <button style="color:#FFF!important;" ng-click="$mdMenu.open()">
+                        {{link.title}}
+                    </button>
+                    <md-menu-content ng-hide="!link.step">
+                        <md-menu-item type="checkbox" ng-model="settings.allowChanges">{{ link.step }}</md-menu-item>
+                    </md-menu-content>
+                </md-menu>
 
-<md-content class="md-padding" flex="100" layout-xs="column" layout="row">
-    <div ng-repeat="box in boxes">
-        <app-box info="box"></app-box>
+                <md-menu id="search-bar" ng-show="showPreSearchBar()" class="md-toolbar-tools">
+                    <md-button class="searchButton" ng-click="initiateSearch()">
+                        <md-icon>search</md-icon>
+                        <span>Suche</span>
+                    </md-button>
+                </md-menu>
+                <md-menu-content id="search-bar-active" ng-show="clicker">
+                    <!-- Search bar -->
+                    <div ng-show="showSearchBar()" class="md-toolbar-tools search-bar">
+                        <button class="md-icon-button" ng-click="submit()">
+                            <md-icon>search</md-icon>
+                        </button>
+                        <!-- Input Text -->
+                        <md-input-container layout="row">
+                            <!-- <label for="search">Search</label> -->
+                            <input id="search-input" type="text" ng-model="search"/>
+                        </md-input-container>
+                        <md-button class="md-icon-button" ng-click="endSearch()">
+                            <md-icon>close</md-icon>
+                        </md-button>
+                    </div>
+                </md-menu-content>
+            </md-menu-bar>
+        </md-toolbar>
+    </header>
+
+    <div class="main" scroll>
+        <section class="landingpage" layout="row" flex ng-repeat="page in pages">
+            <app-page content="page"></app-page>
+        </section>
+
+        <!-- md-content layout="row" ng-view ng-show="collapsed">
+            <md-content ng-repeat="item in main" class="slide md-padding" flex="66" flex-xs="100">
+                <h1>{{item.title}}</h1>
+                <p>{{item.content}}</p>
+            </md-content>
+            <md-content layout="column" ng-show="images">
+                <md-content ng-repeat="image in images" class="slide md-padding" flex="33" flex-xs="100">
+                    <md-card layout-align="center center" style="margin:0!important;">
+                        <md-card-header>{{image}}</md-card-header>
+                        <md-card-content>
+                            <img ng-src="{{image}}" alt="{{images.title}}">
+                        </md-card-content>
+                    </md-card>
+                </md-content>
+            </md-content>
+            <div ng-repeat="box in boxes" class="slide md-padding" flex="33" flex-xs="100">
+                <app-box info="box"></app-box>
+            </div>
+        </md-content> -->
     </div>
-</md-content>
-
-<!-- Icon urls; may be preloaded in templateCache -->
-<md-icon md-svg-src="/android.svg" aria-label="android "></md-icon>
-<md-icon md-svg-src="{{ getAndroid() }}" aria-label="android "></md-icon>
+</div>
 
 <!-- Angular Material requires Angular.js Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
@@ -39,11 +92,13 @@
 <!-- Modules -->
 <script src="app.js"></script>
 
+<!-- Services -->
 <!-- Angular Controller -->
-<script type="text/javascript" src="controllers/pawController.js"></script>
+<script src="controllers/pawController.js"></script>
 
 <!-- Angular Directives -->
-<script type="text/javascript" src="directives/pawBoxes.js"></script>
+<script src="directives/pawBoxes.js"></script>
+<script src="directives/pawPages.js"></script>
 
 </body>
 </html>
