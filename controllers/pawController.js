@@ -1,83 +1,126 @@
-app.controller('pawController', ['$scope', '$http', 'pawService', function ($scope, $http, pawService) {
+app.controller('pawController', [
+    '$scope',
+    '$filter',
+    '$http',
+    '$window',
+    '$anchorScroll',
+    '$location',
+    'pawService', function (
+        $scope,
+        $filter,
+        $http,
+        $window,
+        $anchorScroll,
+        $location,
+        pawService) {
 
-    $scope.getData = function (searchField) {
-        var API_KEY = '3a54d20b53f7b07e3023d62e399c3174';
-        $http.get("http://api.flickr.com/services/rest/", {
-            params: {
-                method: "flickr.photos.search",
-                api_key: API_KEY,
-                format: "json",
-                nojsoncallback: 1,
-                per_page: "6",
-                tags: searchField,
-                tag_mode: "all"
-            }
-        })
-            .then(function (response) {
-                var array = response.data.photos.photo.map(function (photo) {
-                    return "https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg"
-                        .replace("{farm-id}", photo.farm)
-                        .replace("{server-id}", photo.server)
-                        .replace("{id}", photo.id)
-                        .replace("{secret}", photo.secret)
+        $scope.getData = function (searchField) {
+            var _KEY = '5556067055.69346fc.87bdd873bb9244d4ae5f69e78204d469';
+            var CL_KEY = '69346fc2d3f3447ba1cb71eb3eef7bfd';
+            $http.get('https://api.instagram.com/v1/tags/nofilter/media/recent?access_token=' + _KEY, {
+                params: {
+
+                    tags: searchField
+                }
+            })
+                .then(function (data) {
+                    $scope.images = data;
+                    console.log(data);
                 });
-                $scope.images = array;
-                console.log($scope.images);
-            });
-        // Public API
-        return {
-            getPhotosByTag: function (tag) {
-                return getPhotosByTagFn(tag);
+        };
+
+        $scope.search = null;
+        $scope.showPreSearchBar = function() {
+            return $scope.search == null;
+        };
+        $scope.initiateSearch = function() {
+            $scope.search = '';
+            $scope.clicker = true;
+            return $scope.clicker;
+        };
+        $scope.showSearchBar = function() {
+            return $scope.search != null
+        };
+        $scope.endSearch = function() {
+            $scope.clicker = false;
+            return $scope.search = null;
+        };
+        $scope.submit = function() {
+            console.error('Search function not yet implemented');
+        };
+
+        // to focus on input element after it appears
+        $scope.$watch(function() {
+            return document.querySelector('#search-bar:not(.ng-hide)');
+        }, function(){
+            document.getElementById('search-input').focus();
+        });
+
+        $scope.isActive = false;
+        $scope.activeButton = function() {
+            $scope.isActive = !$scope.isActive;
+        };
+
+        $scope.data = pawService('w3e');
+        $scope.logo =
+            {
+                url: 'paw.logo.png',
+                title: 'the Paw Logo',
+                alt: 'Logo 2018'
+            };
+
+        $scope.links = [
+            {
+                "title": "Home",
+                "pathTo": "/"
             },
-            getApiKey: function(){
-                return API_KEY;
+            {
+                "title": "Bio",
+                "step": "Über uns",
+                "pathTo": "/"
+            },
+            {
+                "title": "Album",
+                "step": "Impressionen",
+                "pathTo": "/"
+            },
+            {
+                "title": "Karte",
+                "step": "Wie sie uns finden",
+                "pathTo": "/"
             }
-        };
-    };
+        ];
 
-    $scope.data = pawService('Suche');
-    $scope.logo =
-        {
-            url: 'paw.logo.png',
-            title: 'the Paw Logo',
-            alt: 'Logo 2018'
-        };
+        /* get View in Menu */
 
-    $http({
-        method: 'GET',
-        url: 'data/pawContent.json'
-    }).then(function (response) {
-        $scope.boxes = response.data;
-    }, function (error) {
-        console.log(error);
-    }, 2000);
+        /* get the Main Content */
+        $http({
+            method: 'GET',
+            url: 'data/pawPages.json'
+        }).then(function (response, $anchorScroll) {
+            $scope.pages = response.data;
+        }, function (error) {
+            console.log(error);
+        }, 3000);
 
-    $scope.main = [
-        {title: 'Welcome to Paw AngularJS App'},
-        {content: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'}
-    ];
-    $scope.links = [
-        {
-            title: "Home",
-            pathTo: "/"
-        },
-        {
-            title: "Bio",
-            step: "Über uns",
-            pathTo: "/" + this.title
-        },
-        {
-            title: "Album",
-            step: "Impressionen",
-            pathTo: "/" + this.title
-        },
-        {
-            title: "Karte",
-            step: "Wie sie uns finden",
-            pathTo: "/" + this.title
-        }
-    ]
-}])
+
+        /* get extended Content */
+        $http({
+            method: 'GET',
+            url: 'data/pawContent.json'
+        }).then(function (response) {
+            $scope.boxes = response.data;
+        }, function (error) {
+            console.log(error);
+        }, 2000);
+
+        $scope.main = [
+            {title: 'Welcome to Paw AngularJS App'},
+            {content: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'}
+        ];
+
+    }
+])
 
     .factory('pawService', function () {
         return function (data) {
