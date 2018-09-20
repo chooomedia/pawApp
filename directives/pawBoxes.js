@@ -2,9 +2,8 @@ app.directive('appBox', function() {
     return {
         restrict: 'E',
         scope: {
-            label: '@',
-            info: '='
+            info: '=',
         },
         templateUrl: 'directives/pawBoxes.html',
-    };
+    }
 });

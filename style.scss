@@ -1,4 +1,209 @@
-#topMenu {
-  background: #0099cc;
-  line-height: 64px;
-}
+body {
+
+    md-menu-bar {
+  
+      #search-bar {
+        margin-top: 15px;
+        margin-left: 10px;
+        color: #FFF !important;
+      }
+  
+      #search-bar-active, .search-bar {
+        color: #FFF !important;
+        background: transparent;
+        overflow: hidden;
+  
+        button {
+          md-icon {
+            color: #FFF !important;
+          }
+        }
+  
+        input {
+          margin-top: 14px;
+        }
+      }
+  
+      md-menu {
+        button {
+          span {
+            font-size: 14px;
+            text-transform: lowercase;
+          }
+        }
+  
+        button.searchButton {
+          color: #FFF !important;
+  
+          md-icon {
+            color: #FFF !important;
+          }
+        }
+      }
+  
+    }
+  
+  
+    md-list-item .active {
+      border: 1pix solid rgba(255,255,255,0.5);
+    }
+  
+    md-card {
+      margin: -4em auto 0 auto;
+      -webkit-border-radius: 0px;
+      -webkit-border-top-left-radius: 100em;
+      -moz-border-radius:  0px;
+      -moz-border-radius-topleft: 100em;
+      border-radius: 0px;
+      border-top-left-radius: 100em;
+  
+      .insideTitle {
+       float:right;
+        font-size: 130%;
+        letter-spacing: -1px;
+      }
+    }
+  
+    app-page {
+      width: 100%;
+  
+      .fade {
+  
+      }
+      .md-card-image {
+        width: 100%;
+        max-height: 33%;
+        -webkit-border-radius: 100em;
+        -webkit-border-top-right-radius: 0;
+        -moz-border-radius: 100em;
+        -moz-border-radius-topright: 0;
+        border-radius: 100em;
+        border-top-right-radius: 0;
+      }
+    }
+  
+    .fade.ng-leave {
+      animation: my_fade_animation 0.5s linear;
+      -webkit-animation: my_fade_animation 0.5s linear;
+    }
+  
+    @keyframes my_fade_animation {
+      from { opacity:1; }
+      to { opacity:0; }
+    }
+  
+    @-webkit-keyframes my_fade_animation {
+      from { opacity:1; }
+      to { opacity:0; }
+    }
+  
+    .blurred-box {
+      position: relative;
+      width: 100%;
+      height: 66px;
+      background: inherit;
+      top: calc(50%);
+      left: 0;
+      border-radius: 2px;
+      overflow: hidden;
+      z-index: 1;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  
+    .blurred-box:after {
+      content: '';
+      width: 108%;
+      height: 66px;
+      overflow: hidden;
+      background: inherit;
+      position: fixed;
+      left: -20px;
+      right: 0;
+      top: -20px;
+      bottom: 0;
+      z-index: 1;
+      box-shadow: inset 0 0 0 200px rgba(0, 0, 0, 0.5);
+      filter: blur(10px);
+    }
+  
+    md-toolbar {
+      color: #fff;
+      z-index: 2;
+      background: #333 !important;
+      position: relative;
+      margin-top: 0;
+  
+      .scrollLogo {
+        position: relative;
+        z-index: 10 !important;
+      }
+  
+    }
+  
+    .slide {
+      margin-top: 9em;
+      margin-bottom: -10em;
+    }
+  
+    font-family: 'Exo', sans-serif;
+  
+    section.landingpage {
+      cursor: pointer;
+      min-height: 66px !important;
+  
+      .pageIcon {
+        font-size: 2.15em;
+        margin-top: 13px !important;
+      }
+    }
+  
+    form {
+      margin-bottom: 0 !important;
+    }
+  
+    .topInput {
+      min-width: 33%;
+      height: 2em;
+      top: -5px;
+      font-size: 14px;
+    }
+  
+    .topInput {
+      label {
+        color: #000000;
+      }
+    }
+  
+    md-toolbar {
+      position: fixed;
+      .md-logo {
+        margin: 3px;
+        width: 60px;
+        height: 60px;
+      }
+    }
+  
+    #mainCards {
+      margin: 0 auto;
+    }
+  
+    md-content {
+      flex-wrap: wrap;
+    }
+  
+    .fade {
+      .ng-enter {
+        transition: all .3s;
+        opacity: 0;
+      }
+      .ng-enter-active {
+        transition: all .3s;
+        opacity: 1;
+      }
+    }
+  
+    .checkBoxTop {
+      line-height: 40px;
+      font-size: 14px;
+    }
+  }

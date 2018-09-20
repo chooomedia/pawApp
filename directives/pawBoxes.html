@@ -1,12 +1,19 @@
-<md-card flex="50" flex-xs="100">
+<md-card id="mainCards" class="md-padding" ng-controller="pawController">
+  <md-chips>
+    <md-chip>{{ info.author }}</md-chip>
+  </md-chips>
     <md-card-title>
         <md-card-title-text>
-            <span class="md-headline">{{ box.title }}</span>
-            <span class="md-subhead">{{ box.content}}</span>
+            <span class="md-headline">{{ info.title }}</span>
+            <span class="md-subhead">{{ info.content}}</span>
         </md-card-title-text>
     </md-card-title>
+
     <md-card-content layout="row" layout-align="space-between">
-        <img ng-src="{{ box.image }}" class="card-media"/>
+        <!-- <div ng-repeat="image in images">
+            <img flex="80" ng-src="{{ image }}" class="card-media"/>
+        </div> -->
+            <img flex="100" height="*" ng-src="{{ info.image }}" class="card-media"/>
         <md-card-actions layout="column">
             <md-button class="md-icon-button">
                 <md-icon> favorite</md-icon>
@@ -20,8 +27,3 @@
         </md-card-actions>
     </md-card-content>
 </md-card>
-
-<div layout="" layout-padding="" layout-align="center end" style="height:200px">
-    <md-checkbox ng-model="showDarkTheme">Use 'Dark' Themed Cards</md-checkbox>
-</div>
-<md-icon md-svg-icon="social:android" aria-label="android "></md-icon>
